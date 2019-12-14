@@ -10,6 +10,12 @@
 #include "lobject.h"
 #include "lzio.h"
 
+/* default */
+/* #define LUAC_STR_SIZE_TYPE size_t */
+
+/* for 32 bit compatible bytecode */
+#define LUAC_STR_SIZE_TYPE int
+
 /* load one chunk; from lundump.c */
 LUAI_FUNC Proto* luaU_undump (lua_State* L, ZIO* Z, Mbuffer* buff, const char* name);
 

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 SCRIPT_DIR=`dirname "$0"`
+if realpath / >/dev/null; then SCRIPT_DIR=$(realpath "$SCRIPT_DIR"); fi
 DAPHNE_BIN=daphne.bin
 DAPHNE_SHARE=~/.daphne
 
@@ -8,30 +9,40 @@ echo "Singe Launcher : Script dir is $SCRIPT_DIR"
 cd "$SCRIPT_DIR"
 
 # point to our linked libs that user may not have
-LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$SCRIPT_DIR:$DAPHNE_SHARE:$LD_LIBRARY_PATH
 
-if [ -z $1 ] ; then
-	echo "Specify a game to try: timegal"
-	exit
+if [ "$1" = "-fullscreen" ]; then
+    FULLSCREEN="-fullscreen"
+    shift
 fi
 
+if [ -z $1 ] ; then
+	echo "Specify a game to try: "
+	echo
+	echo "\t$0 [-fullscreen] <gamename>"
+	echo
+
+        echo -n "Games available: "
+	for game in $(ls $DAPHNE_SHARE/singe/); do
+        	echo -n "$game "
+	done
+	echo
+	exit
+
+fi
 
 #strace -o strace.txt \
 ./$DAPHNE_BIN singe vldp \
+$FULLSCREEN \
 -framefile $DAPHNE_SHARE/singe/$1/$1.txt \
 -script $DAPHNE_SHARE/singe/$1/$1.singe \
 -homedir $DAPHNE_SHARE \
 -datadir $DAPHNE_SHARE \
--blank_searches \
--min_seek_delay 1000 \
--seek_frames_per_ms 20 \
 -sound_buffer 2048 \
 -noserversend \
--x 640 \
--y 480
+-x 800 \
+-y 600 
 
-#-bank 0 11111001 \
-#-bank 1 00100111 \
 
 EXIT_CODE=$?
 
@@ -46,4 +57,3 @@ if [ "$EXIT_CODE" -ne "0" ] ; then
 		echo "DaphneLoader failed with an unknown exit code : $EXIT_CODE."
 	fi
 fi
-
