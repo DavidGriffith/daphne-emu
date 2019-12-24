@@ -223,6 +223,10 @@ bool ldp_vldp::init_player()
 							// this number is used repeatedly, so we calculate it once
 							g_vertical_offset = g_game->get_video_row_offset();
 
+							// We get negative integer on certain SDL overlay games which break &yuv_palette[*gamevid_pixels]
+							// in prepare_frame_callback_with_overlay() causing a segfault. Fix negation here....
+							if ( g_vertical_offset < 0 ) g_vertical_offset = abs(g_vertical_offset);
+
 							// if testing has been requested then run them ...
 							if (m_testing)
 							{
