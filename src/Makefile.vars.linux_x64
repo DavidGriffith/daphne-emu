@@ -11,7 +11,7 @@ export CC=gcc
 # optimized version 
 # NOTE : gcc 3.x has a bug that causes compilation to choke on m80.cpp 
 # If you want to -DGCC_X86_ASM for extra speed, you have to use g++ 3.0 or earlier 
-DFLAGS = -O3 -fexpensive-optimizations -funroll-loops -fPIC 
+DFLAGS = -O3 -fexpensive-optimizations -funroll-loops -fPIC -fsigned-char
 
 # this is to be exported for MMX assembly optimization 
 #export USE_MMX = 1 
