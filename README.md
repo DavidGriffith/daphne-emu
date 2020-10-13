@@ -25,7 +25,13 @@ amd64 processor.  I'm not sure anymore how to get Daphne compiled for
     cd ../game/singe
     make -f Makefile.linux_x64
     cd ../..
+
+    # For amd64
     ln -s Makefile.vars.linux_x64 Makefile.vars
+
+    # For Raspberry Pi
+    ln -s Makefile.vars.linux_x64_RPi Makefile.vars
+
     make
     cd ..
     mkdir -p ~/.daphne
