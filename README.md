@@ -31,11 +31,6 @@ amd64 processor.  I'm not sure anymore how to get Daphne compiled for
     mkdir -p ~/.daphne
     cp -a pics sound ~/.daphne/
 
-If compiling on a **Raspberry Pi** you should use the following `Makefile.vars`
-replacing the above command
-
-    ln -s Makefile.vars.linux_rpi Makefile.vars
-
 ### Missing libraries?
 
 Cutting and pasting the following in a Debian GNU/Linux system (or
