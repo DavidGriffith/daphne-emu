@@ -332,14 +332,14 @@ static int indx()
 
 static int indax()
 	{
-		signed char    a=ar;
+		char    a=ar;
         cpu_clock++;
         return ((*(regist[((*op)&0x60)>>5]))+a)&0xffff;
 	}
 
 static int indbx()
 	{
-		signed char    b=br;
+		char    b=br;
         cpu_clock++;
         return ((*(regist[((*op)&0x60)>>5]))+b)&0xffff;
 	}
@@ -351,7 +351,7 @@ static int inder()
 
 static int ind1x()
 	{
-		signed char    del=op[1];
+		char    del=op[1];
         pc++;pc&=0xffff;
         cpu_clock++;
         return ((*(regist[((*op)&0x60)>>5]))+del)&0xffff;
@@ -374,7 +374,7 @@ static int inddx()
 
 static int ind1p()
 	{
-		signed char    del=op[1];
+		char    del=op[1];
         pc++;pc&=0xffff;
         cpu_clock++;
         return (pc+del)&0xffff;
