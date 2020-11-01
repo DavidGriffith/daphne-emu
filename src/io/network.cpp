@@ -240,7 +240,9 @@ unsigned int get_sys_mem()
 	F = popen(s, "r");
 	if (F)
 	{
-		fscanf(F, "%u", &mem);	// this breaks if they have over 2 gigs of ram :)
+		// this breaks if they have over 2 gigs of ram :)
+		if (fscanf(F, "%u", &mem) != 1)
+		  fprintf(stderr, "Failed to read kcore!\n");
 		pclose(F);
 	}
 

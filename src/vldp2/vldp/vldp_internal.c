@@ -1067,7 +1067,8 @@ VLDP_BOOL ivldp_get_mpeg_frame_offsets(char *mpeg_name)
 			// now that file exists and we have it open, we have to read it
 
 			fseek(data_file, 0L, SEEK_SET);
-			fread(&header, sizeof(header), 1, data_file);	// read .DAT file header
+			if (fread(&header, sizeof(header), 1, data_file) != 1)
+			  fprintf(stderr, "Failed to read .DAT file header!\n");
 
 			// if version, file size, or finished are wrong, the dat file is no good and has to be regenerated
 			if ((header.length != mpeg_size) || (header.version != DAT_VERSION) || (header.finished != 1))
