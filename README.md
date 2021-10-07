@@ -38,27 +38,27 @@ derivative), will install all prerequisite development libraries.
 
 I suggest you create a folder called "games" in your home, another called "arcade" inside it,
 and download this project inside it via git-clone.
-So, you will have a "~/games/arcade/daphne/", which will have the binary after compiling it.
+So, you will have a "$HOME/games/arcade/daphne/", which will have the binary after compiling it.
 
-The current practice is to place the disc images, roms and other media in "~/.daphne" (a hidden folder),
+The current practice is to place the disc images, roms and other media in "$HOME/.daphne" (a hidden folder),
 but I really don't think it is a good idea for several reasons.
 **You will need to copy or move "daphne/pics" and "daphne/sound" into this hidden folder**.
-I suggest you to place the singe games (such as Mad Dog McCree) in "~/games/arcade/daphne/singe/" and
-vldp games (such as Dragon's Lair) in "~/games/arcade/daphne/vldp_dl/".
+I suggest you to place the singe games (such as Mad Dog McCree) in "$HOME/games/arcade/daphne/singe/" and
+vldp games (such as Dragon's Lair) in "$HOME/games/arcade/daphne/vldp_dl/".
 
 *ATTENTION*: Daphne needs the games to have specific names and specific places to run.
-So Dragon's Lair frames goes in "~/games/arcade/daphne/vldp_dl/lair/", and its rom at
-"~/games/arcade/daphne/vldp_dl/roms/". The standard Daphne's name for its rom is "lair.zip"
+So Dragon's Lair frames goes in "$HOME/games/arcade/daphne/vldp_dl/lair/", and its rom at
+"$HOME/games/arcade/daphne/vldp_dl/roms/". The standard Daphne's name for its rom is "lair.zip"
 (in Mame this **exact same rom** is called "dlair.zip").
-Following this pattern, Mad Dog McCree frames should be placed at "~/games/daphne/singe/maddog".
+Following this pattern, Mad Dog McCree frames should be placed at "$HOME/games/daphne/singe/maddog".
 
 Obviously you can change this pattern...
 
 Anyway, there are two good scripts from DavidGriffith called "run.sh" and "singe.sh",
 which will run Dragon's Lair and Mad Dog McCree, respectively. Open the scripts and study them (they are
-point to "~/.daphne").
+point to "$HOME/.daphne").
 I am changed them a little and renamed them to "run_vldp.sh" and "run_singe.sh"
-(which are pointing to "~/games/arcade/daphne"). Their settings worked fine on my raspberry pi 4b.
+(which are pointing to "$HOME/games/arcade/daphne"). Their settings worked fine on my raspberry pi 4b.
 
 --------------------------------
 
