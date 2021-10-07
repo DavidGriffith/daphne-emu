@@ -60,8 +60,8 @@ vector<SDL_Surface *> g_spriteList;
 struct yuv_buf        g_sep_yuv_buf;
 int                   g_fontCurrent         = -1;
 int                   g_fontQuality         =  1;
-double                g_sep_overlay_scale_x =  1;
-double                g_sep_overlay_scale_y =  1;
+float                g_sep_overlay_scale_x =  1.0;
+float                g_sep_overlay_scale_y =  1.0;
 bool				  g_pause_state		    = false; // by RDG2010
 
 int (*g_original_prepare_frame)(struct yuv_buf *buf);
@@ -222,13 +222,13 @@ void sep_do_blit(SDL_Surface *srfDest)
 	sep_srf32_to_srf8(g_se_surface, srfDest);
 }
 
+// at widescreen, the cursor position deviates in the screen sides
+float overlay_wdxy2_factor = 0.0;
+float overlay_scale_x_factor = 1.0;
+
 void sep_do_mouse_move(Uint16 x, Uint16 y, Sint16 xrel, Sint16 yrel)
 {
 	static bool debounced = false;
-	int x1 = (int)x;
-	int y1 = (int)y;
-	int xr = (int)xrel;
-	int yr = (int)yrel;
 	
 	// Not sure what's wrong here.  I think things are getting started before Singe is ready.
 	if (!debounced) {
@@ -236,10 +236,10 @@ void sep_do_mouse_move(Uint16 x, Uint16 y, Sint16 xrel, Sint16 yrel)
 		return;
 	}
 	
-	x1 *= g_sep_overlay_scale_x;
-	y1 *= g_sep_overlay_scale_y;
-	xr *= g_sep_overlay_scale_x;
-	yr *= g_sep_overlay_scale_y;
+	int x1 = (int) (x * overlay_scale_x_factor + overlay_wdxy2_factor);
+	int y1 = (int) (y * g_sep_overlay_scale_y);
+	int xr = (int) (xrel * g_sep_overlay_scale_x);
+	int yr = (int) (yrel * g_sep_overlay_scale_y);
 	
 	sep_call_lua("onMouseMoved", "iiii", x1, y1, xr, yr);
 }
@@ -353,6 +353,13 @@ void sep_set_surface(int width, int height)
 		g_se_surface = SDL_CreateRGBSurface(SDL_SWSURFACE, g_se_overlay_width, g_se_overlay_height, 32, 0xFF, 0xFF00, 0xFF0000, 0xFF000000);
 		g_sep_overlay_scale_x = (double)g_se_overlay_width / (double)g_pSingeIn->get_video_width();
 		g_sep_overlay_scale_y = (double)g_se_overlay_height / (double)g_pSingeIn->get_video_height();
+        if( g_pSingeIn->get_video_width() * g_se_overlay_height > g_pSingeIn->get_video_height() * g_se_overlay_width ) {
+            overlay_scale_x_factor = g_sep_overlay_scale_y;
+            overlay_wdxy2_factor = 0.5 * (g_sep_overlay_scale_x - g_sep_overlay_scale_y) * g_pSingeIn->get_video_width();
+        } else {
+            overlay_scale_x_factor = g_sep_overlay_scale_x;
+            overlay_wdxy2_factor = 0.0;
+        }
 	}
 }
 
