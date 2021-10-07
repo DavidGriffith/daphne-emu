@@ -1,5 +1,8 @@
+
 Daphne: the First Ever Multiple Arcade Laserdisc Emulator
 =========================================================
+
+<img src=https://raw.githubusercontent.com/baarreth/daphne/d25172eef41760559f84327672974b22aaa4e9a2/pics/daphne.gif />
 
 Daphne, the First Ever Multiple Arcade Laserdisc Emulator is a program 
 that lets one play the original versions of many laserdisc arcade games 
@@ -7,29 +10,22 @@ on one's PC.
 
 The official website for Daphne is http://www.daphne-emu.com.
 
+This is a fork from [DavidGriffith's work](https://github.com/DavidGriffith/daphne), and we are pretty outdated.
+If you want to use a newer version, you should use the SDL2 port from [DirtBagXon](https://github.com/DirtBagXon/hypseus-singe).
+
+### Here is the link: https://github.com/DirtBagXon/hypseus-singe
+
+There is no good reason to use this outdated version, except if you are
+having bugs with the SDL2 version, you are impatient and you have fun by messing with outdated code (which was my case). 
+
 ---
 
-As development for Daphne has stopped, this repository is intended as 
-something of a continuation until the author decides to do something 
-official.
+## Compiling Daphne on Linux (64-bit)
 
-## Compiling Daphne on Linux
+    cd src
+    ./compile_everything.sh
 
-These instructions will work to get Daphne built on a machine using an 
-amd64 processor.  I'm not sure anymore how to get Daphne compiled for 
-32-bit Linux.
-
-    cd src/vldp2
-    ./configure --disable-accel-detect
-    make -f Makefile.linux_x64
-    cd ../game/singe
-    make -f Makefile.linux_x64
-    cd ../..
-    ln -s Makefile.vars.linux_x64 Makefile.vars
-    make
-    cd ..
-    mkdir -p ~/.daphne
-    cp -a pics sound ~/.daphne/
+This script will exit on the first error. So, pay attention on its instructions and execution.
 
 ### Missing libraries?
 
@@ -37,6 +33,39 @@ Cutting and pasting the following in a Debian GNU/Linux system (or
 derivative), will install all prerequisite development libraries.
 
     sudo apt install libsdl-dev libglew-dev libvorbis-dev libsdl-image1.2-dev libsdl-ttf2.0-dev
+
+## Where to place this project in your computer
+
+I suggest you create a folder called "games" in your home, another called "arcade" inside it,
+and download this project inside it via git-clone.
+So, you will have a "~/games/arcade/daphne/", which will have the binary after compiling it.
+
+The current practice is to place the disc images, roms and other media in "~/.daphne" (a hidden folder),
+but I really don't think it is a good idea for several reasons.
+**You will need to copy or move "daphne/pics" and "daphne/sound" into this hidden folder**.
+I suggest you to place the singe games (such as Mad Dog McCree) in "~/games/arcade/daphne/singe/" and
+vldp games (such as Dragon's Lair) in "~/games/arcade/daphne/vldp_dl/".
+
+*ATTENTION*: Daphne needs the games to have specific names and specific places to run.
+So Dragon's Lair frames goes in "~/games/arcade/daphne/vldp_dl/lair/", and its rom at
+"~/games/arcade/daphne/vldp_dl/roms/". The standard Daphne's name for its rom is "lair.zip"
+(in Mame this **exact same rom** is called "dlair.zip").
+Following this pattern, Mad Dog McCree frames should be placed at "~/games/daphne/singe/maddog".
+
+Obviously you can change this pattern...
+
+Anyway, there are two good scripts from DavidGriffith called "run.sh" and "singe.sh",
+which will run Dragon's Lair and Mad Dog McCree, respectively. Open the scripts and study them (they are
+point to "~/.daphne").
+I am changed them a little and renamed them to "run_vldp.sh" and "run_singe.sh"
+(which are pointing to "~/games/arcade/daphne"). Their settings worked fine on my raspberry pi 4b.
+
+--------------------------------
+
+If you are still having a hard time to configure it all, read the following text from 
+DavidGriffith.
+
+--------------------------------
 
 ## Laserdisc images and ROMs
 
