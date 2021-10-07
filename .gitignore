@@ -1,0 +1,12 @@
+**/*.o
+**/*.d
+**/*.so
+**/*.bak
+daphne
+daphne_log.txt
+libsinge.so
+libvldp2.so
+logs/*
+/roms/*
+/singe
+/vldp_dl
