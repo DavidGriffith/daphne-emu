@@ -103,6 +103,16 @@ float g_fRotateDegrees = 0.0;
 GLuint g_texture_id = 0;	// for any blits we have to do in opengl ...
 #endif
 
+inline static SDL_Cursor * init_invisible_cursor()
+{
+  Uint8 data[1*8] = {0};
+  Uint8 mask[1*8] = {0};
+  return SDL_CreateCursor(data, mask, 8, 8, 0, 0);
+}
+
+SDL_Cursor * invisible_cursor = NULL;
+// TODO "if (!invisible_cursor) SDL_FreeCursor(invisible_cursor);" when the emulation ends
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // initializes the window in which we will draw our BMP's
@@ -160,7 +170,19 @@ bool init_display()
 		// Useful for ALG SINGE games
 		// If there is a game that needs to show the cursor icon of the OS
 		// then modify.
-		SDL_ShowCursor(SDL_DISABLE);	// hide mouse in fullscreen mode
+		//SDL_ShowCursor(SDL_DISABLE);	// hide mouse in fullscreen mode
+
+		// Apparently, disabling the cursor will result in wrong lightgun's mouse input
+		// Therefore, only disable it if we are not able to create an invisible one
+		// It worked fine on Ubuntu
+		// May make fakefullscreen unnecessary
+        invisible_cursor = init_invisible_cursor();
+        if(invisible_cursor == NULL) {
+            printline("Failed init_invisible_cursor");
+            printline(SDL_GetError());
+            SDL_ShowCursor(SDL_DISABLE);	// hide mouse in fullscreen mode
+        }
+        else SDL_SetCursor(invisible_cursor);
 		if (g_fullscreen)
 		{
 			//SDL_ShowCursor(SDL_DISABLE);	// hide mouse in fullscreen mode

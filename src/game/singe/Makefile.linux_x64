@@ -1,7 +1,6 @@
 # Makefile for SINGE
 # Written by RDG2010
-
-# TODO: Add dependencies
+# baarreth, 2021
 
 CC = gcc
 # Uncomment for debugging purposes
@@ -9,7 +8,7 @@ CC = gcc
 #DFLAGS = -ggdb -DSINGE_DEBUG -DDEBUG
 
 # Benchmarking version
-#DFLAGS = -O3 -march=i686 -fomit-frame-pointer -funroll-loops -DVLDP_BENCHMARK
+#DFLAGS = -O3 -fomit-frame-pointer -funroll-loops -fPIC -DVLDP_BENCHMARK
 
 # Standard version
 DFLAGS = -O3 -fomit-frame-pointer -funroll-loops -fPIC
@@ -36,8 +35,147 @@ all:		singe
 
 singe:		${OBJS}
 		${CC} -shared -o ${LIBNAME} ${OBJS} ${LIBS}
-		cp ${LIBNAME} ../../../.
+		ln -sfr ${LIBNAME} ../../../
 
 clean:
 		rm -f ${LIBNAME} ${OBJS}
 		
+depend:
+		makedepend -DMAKEDEPEND -D'WIN32=0' `ls *.c *.cpp`
+
+# DO NOT DELETE
+
+lapi.o: /usr/include/assert.h /usr/include/features.h
+lapi.o: /usr/include/stdc-predef.h /usr/include/math.h /usr/include/string.h
+lapi.o: /usr/include/strings.h lua.h luaconf.h /usr/include/limits.h lapi.h
+lapi.o: lobject.h llimits.h ldebug.h lstate.h ltm.h lzio.h lmem.h ldo.h
+lapi.o: lfunc.h lgc.h lstring.h ltable.h lundump.h lvm.h
+lauxlib.o: /usr/include/ctype.h /usr/include/features.h
+lauxlib.o: /usr/include/stdc-predef.h /usr/include/errno.h
+lauxlib.o: /usr/include/stdio.h /usr/include/stdlib.h /usr/include/alloca.h
+lauxlib.o: /usr/include/string.h /usr/include/strings.h lua.h luaconf.h
+lauxlib.o: /usr/include/limits.h /usr/include/math.h lauxlib.h
+lbaselib.o: /usr/include/ctype.h /usr/include/features.h
+lbaselib.o: /usr/include/stdc-predef.h /usr/include/stdio.h
+lbaselib.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/string.h
+lbaselib.o: /usr/include/strings.h lua.h luaconf.h /usr/include/limits.h
+lbaselib.o: /usr/include/math.h lauxlib.h lualib.h
+lcode.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/features.h
+lcode.o: /usr/include/stdc-predef.h lua.h luaconf.h /usr/include/limits.h
+lcode.o: /usr/include/math.h lcode.h llex.h lobject.h llimits.h lzio.h lmem.h
+lcode.o: lopcodes.h lparser.h ldebug.h lstate.h ltm.h ldo.h lgc.h ltable.h
+ldblib.o: /usr/include/stdio.h /usr/include/stdlib.h /usr/include/alloca.h
+ldblib.o: /usr/include/features.h /usr/include/stdc-predef.h
+ldblib.o: /usr/include/string.h /usr/include/strings.h lua.h luaconf.h
+ldblib.o: /usr/include/limits.h /usr/include/math.h lauxlib.h lualib.h
+ldebug.o: /usr/include/string.h /usr/include/strings.h
+ldebug.o: /usr/include/features.h /usr/include/stdc-predef.h lua.h luaconf.h
+ldebug.o: /usr/include/limits.h /usr/include/math.h lapi.h lobject.h
+ldebug.o: llimits.h lcode.h llex.h lzio.h lmem.h lopcodes.h lparser.h
+ldebug.o: ldebug.h lstate.h ltm.h ldo.h lfunc.h lstring.h lgc.h ltable.h
+ldebug.o: lvm.h
+ldo.o: /usr/include/setjmp.h /usr/include/features.h
+ldo.o: /usr/include/stdc-predef.h /usr/include/stdlib.h /usr/include/alloca.h
+ldo.o: /usr/include/string.h /usr/include/strings.h lua.h luaconf.h
+ldo.o: /usr/include/limits.h /usr/include/math.h ldebug.h lstate.h lobject.h
+ldo.o: llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lopcodes.h lparser.h
+ldo.o: lstring.h ltable.h lundump.h lvm.h
+ldump.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h lobject.h
+ldump.o: llimits.h lstate.h ltm.h lzio.h lmem.h lundump.h
+lfunc.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h lfunc.h
+lfunc.o: lobject.h llimits.h lgc.h lmem.h lstate.h ltm.h lzio.h
+lgc.o: /usr/include/string.h /usr/include/strings.h /usr/include/features.h
+lgc.o: /usr/include/stdc-predef.h lua.h luaconf.h /usr/include/limits.h
+lgc.o: /usr/include/math.h ldebug.h lstate.h lobject.h llimits.h ltm.h lzio.h
+lgc.o: lmem.h ldo.h lfunc.h lgc.h lstring.h ltable.h
+linit.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h lualib.h
+linit.o: lauxlib.h /usr/include/stdio.h
+liolib.o: /usr/include/errno.h /usr/include/features.h
+liolib.o: /usr/include/stdc-predef.h /usr/include/stdio.h
+liolib.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/string.h
+liolib.o: /usr/include/strings.h lua.h luaconf.h /usr/include/limits.h
+liolib.o: /usr/include/math.h lauxlib.h lualib.h
+llex.o: /usr/include/ctype.h /usr/include/features.h
+llex.o: /usr/include/stdc-predef.h /usr/include/locale.h
+llex.o: /usr/include/string.h /usr/include/strings.h lua.h luaconf.h
+llex.o: /usr/include/limits.h /usr/include/math.h ldo.h lobject.h llimits.h
+llex.o: lstate.h ltm.h lzio.h lmem.h llex.h lparser.h lstring.h lgc.h
+llex.o: ltable.h
+lmathlib.o: /usr/include/stdlib.h /usr/include/alloca.h
+lmathlib.o: /usr/include/features.h /usr/include/stdc-predef.h
+lmathlib.o: /usr/include/math.h lua.h luaconf.h /usr/include/limits.h
+lmathlib.o: lauxlib.h /usr/include/stdio.h lualib.h
+lmem.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h ldebug.h
+lmem.o: lstate.h lobject.h llimits.h ltm.h lzio.h lmem.h ldo.h
+loadlib.o: /usr/include/stdlib.h /usr/include/alloca.h
+loadlib.o: /usr/include/features.h /usr/include/stdc-predef.h
+loadlib.o: /usr/include/string.h /usr/include/strings.h lua.h luaconf.h
+loadlib.o: /usr/include/limits.h /usr/include/math.h lauxlib.h
+loadlib.o: /usr/include/stdio.h lualib.h
+lobject.o: /usr/include/ctype.h /usr/include/features.h
+lobject.o: /usr/include/stdc-predef.h /usr/include/stdio.h
+lobject.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/string.h
+lobject.o: /usr/include/strings.h lua.h luaconf.h /usr/include/limits.h
+lobject.o: /usr/include/math.h ldo.h lobject.h llimits.h lstate.h ltm.h
+lobject.o: lzio.h lmem.h lstring.h lgc.h lvm.h
+lopcodes.o: lopcodes.h llimits.h /usr/include/limits.h lua.h luaconf.h
+lopcodes.o: /usr/include/math.h
+loslib.o: /usr/include/errno.h /usr/include/features.h
+loslib.o: /usr/include/stdc-predef.h /usr/include/locale.h
+loslib.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/string.h
+loslib.o: /usr/include/strings.h /usr/include/time.h lua.h luaconf.h
+loslib.o: /usr/include/limits.h /usr/include/math.h lauxlib.h
+loslib.o: /usr/include/stdio.h lualib.h
+lparser.o: /usr/include/string.h /usr/include/strings.h
+lparser.o: /usr/include/features.h /usr/include/stdc-predef.h lua.h luaconf.h
+lparser.o: /usr/include/limits.h /usr/include/math.h lcode.h llex.h lobject.h
+lparser.o: llimits.h lzio.h lmem.h lopcodes.h lparser.h ldebug.h lstate.h
+lparser.o: ltm.h ldo.h lfunc.h lstring.h lgc.h ltable.h
+lrandom.o: /usr/include/math.h /usr/include/stdio.h lua.h luaconf.h
+lrandom.o: /usr/include/limits.h lauxlib.h random.c
+lstate.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h ldebug.h
+lstate.o: lstate.h lobject.h llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h
+lstate.o: lgc.h llex.h lstring.h ltable.h
+lstring.o: /usr/include/string.h /usr/include/strings.h
+lstring.o: /usr/include/features.h /usr/include/stdc-predef.h lua.h luaconf.h
+lstring.o: /usr/include/limits.h /usr/include/math.h lmem.h llimits.h
+lstring.o: lobject.h lstate.h ltm.h lzio.h lstring.h lgc.h
+lstrlib.o: /usr/include/ctype.h /usr/include/features.h
+lstrlib.o: /usr/include/stdc-predef.h /usr/include/stdio.h
+lstrlib.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/string.h
+lstrlib.o: /usr/include/strings.h lua.h luaconf.h /usr/include/limits.h
+lstrlib.o: /usr/include/math.h lauxlib.h lualib.h
+ltable.o: /usr/include/math.h /usr/include/string.h /usr/include/strings.h
+ltable.o: /usr/include/features.h /usr/include/stdc-predef.h lua.h luaconf.h
+ltable.o: /usr/include/limits.h ldebug.h lstate.h lobject.h llimits.h ltm.h
+ltable.o: lzio.h lmem.h ldo.h lgc.h ltable.h
+ltablib.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h
+ltablib.o: lauxlib.h /usr/include/stdio.h lualib.h
+ltm.o: /usr/include/string.h /usr/include/strings.h /usr/include/features.h
+ltm.o: /usr/include/stdc-predef.h lua.h luaconf.h /usr/include/limits.h
+ltm.o: /usr/include/math.h lobject.h llimits.h lstate.h ltm.h lzio.h lmem.h
+ltm.o: lstring.h lgc.h ltable.h
+lundump.o: /usr/include/string.h /usr/include/strings.h
+lundump.o: /usr/include/features.h /usr/include/stdc-predef.h lua.h luaconf.h
+lundump.o: /usr/include/limits.h /usr/include/math.h ldebug.h lstate.h
+lundump.o: lobject.h llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lstring.h
+lundump.o: lgc.h lundump.h
+lvm.o: /usr/include/stdio.h /usr/include/stdlib.h /usr/include/alloca.h
+lvm.o: /usr/include/features.h /usr/include/stdc-predef.h
+lvm.o: /usr/include/string.h /usr/include/strings.h lua.h luaconf.h
+lvm.o: /usr/include/limits.h /usr/include/math.h ldebug.h lstate.h lobject.h
+lvm.o: llimits.h ltm.h lzio.h lmem.h ldo.h lfunc.h lgc.h lopcodes.h lstring.h
+lvm.o: ltable.h lvm.h
+lzio.o: /usr/include/string.h /usr/include/strings.h /usr/include/features.h
+lzio.o: /usr/include/stdc-predef.h lua.h luaconf.h /usr/include/limits.h
+lzio.o: /usr/include/math.h llimits.h lmem.h lstate.h lobject.h ltm.h lzio.h
+print.o: /usr/include/ctype.h /usr/include/features.h
+print.o: /usr/include/stdc-predef.h /usr/include/stdio.h ldebug.h lstate.h
+print.o: lua.h luaconf.h /usr/include/limits.h /usr/include/math.h lobject.h
+print.o: llimits.h ltm.h lzio.h lmem.h lopcodes.h lundump.h
+singeproxy.o: singeproxy.h /usr/include/stdlib.h /usr/include/alloca.h
+singeproxy.o: /usr/include/features.h /usr/include/stdc-predef.h
+singeproxy.o: /usr/include/string.h /usr/include/strings.h
+singeproxy.o: ../../vldp2/vldp/vldp.h lua.h luaconf.h /usr/include/limits.h
+singeproxy.o: /usr/include/math.h lualib.h lauxlib.h /usr/include/stdio.h
+singeproxy.o: singe_interface.h
