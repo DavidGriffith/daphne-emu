@@ -3,8 +3,6 @@
 
 # IMPORTANT: vldp2 needs to be configured with "--disable-accel-detect"
 
-# TODO: Add dependencies 
-
 CC = gcc 
 #DFLAGS = -pg 
 #DFLAGS = -g -DVLDP_DEBUG 
@@ -36,7 +34,10 @@ all:	vldp2
 
 vldp2:	${OBJS} 
 	${CC} -shared -o ${LIBNAME} ${OBJS} ${LIBS} 
-	cp ${LIBNAME} ../../. 
+	ln -sfr ${LIBNAME} ../../
 
 clean: 
 	rm -f ${LIBNAME} ${OBJS}
+
+depend:
+	makedepend -DMAKEDEPEND -D'WIN32=0' $(subst .o,.c,$(OBJS))
