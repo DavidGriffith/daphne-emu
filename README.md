@@ -56,8 +56,8 @@ Obviously you can change this pattern...
 
 Anyway, there are two good scripts from DavidGriffith called "run.sh" and "singe.sh",
 which will run Dragon's Lair and Mad Dog McCree, respectively. Open the scripts and study them (they are
-point to "$HOME/.daphne").
-I am changed them a little and renamed them to "run_vldp.sh" and "run_singe.sh"
+pointing to "$HOME/.daphne").
+I changed them a little and renamed them to "run_vldp.sh" and "run_singe.sh"
 (which are pointing to "$HOME/games/arcade/daphne"). Their settings worked fine on my raspberry pi 4b.
 
 --------------------------------
